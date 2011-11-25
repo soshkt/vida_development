@@ -6,9 +6,8 @@
   <%= javascript_include_tag "analyst" %>
   <script type="text/javascript">
   	$(function() {
-  		$( "#datepicker1" ).datepicker({
+  		$( "#startDate" ).datepicker({
   		  showOptions: {direction: 'up' },
-  		  defaultDate: '-1m',
   		  showMonthAfterYear: true, // 月在年之后显示  
         changeMonth: true,     // 允许选择月份  
         changeYear: true,     // 允许选择年份  
@@ -26,7 +25,7 @@
   		});
   	});
   	$(function() {
-  		$( "#datepicker2" ).datepicker({
+  		$( "#endDate" ).datepicker({
  //       currentText: '2011-10-20',
   		  showMonthAfterYear: true, // 月在年之后显示  
         changeMonth: true,     // 允许选择月份  
@@ -52,30 +51,17 @@
   <p> 数据分析 </p>
   <div id="columns">
     <div id="side">
-      <div>
-        <p>开始时间: <input type="text" id="datepicker1"></input></p>
-        <p>结束时间: <input type="text" id="datepicker2"></input></p>
-      </div>
-      
-      <div>
+      <%= form_tag  "todo" do %>
+        <p>开始时间: <%=text_field_tag :startDate, params[:startDate], :value => 1.months.ago.strftime("%Y-%m-%d") %></p>
+        <p>结束时间: <%=text_field_tag :endDate, params[:endDate],:value => Time.now.strftime("%Y-%m-%d") %></p>
         <p> 统计内容: 
-          <select>
-            <option value="user">用户</option>
-            <option value="photo">图片</option>
-            <option value="video">视频</option>
-            <option value="photovideo">图片和视频</option>
-          </select>
+          <%= select_tag :name, options_for_select([["用户",0],["图片",1],["视频",2],["图片与视频",3]])  %>
         </p>
-        <p> 时间单位:
-          <select>
-            <option value="day" >每天</option>
-            <option value="hour">小时</option>
-            <option value="week">星期</option>
-          </select>         
-      </div>
-      
-      
-      
+        <p> 时间单位
+          <%= select_tag :type, options_for_select([["每天",0],["小时",1],["星期",2]])%>
+        </p> 
+        <%= submit_tag "submit"%>       
+      <% end %>
       
     </div>
     <div id="main">

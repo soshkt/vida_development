@@ -12,6 +12,8 @@ VidaDevelopment::Application.routes.draw do
   
   get "analyst/count_got_from"
   
+  post "analyst/todo"
+  
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

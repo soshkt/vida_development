@@ -12,54 +12,38 @@ class AnalystController < ApplicationController
     show
   end
   
-  
-  def new_users
-    @numbers = Users.count_new_user
-    @name = 'User'
-    @title = 'New Users'
+  def todo
+    if (params[:name] == "0")
+      @numbers = Users
+      @name = "User"
+      @title = "New User"
+    elsif (params[:name] == "1")
+      @numbers = Activities.get_photo
+      @name = "Photo"
+      @title = "New Photo"
+    elsif (params[:name] == "2")
+      @numbers = Activities.get_video
+      @name = "Video"
+      @title = "New Video"
+    elsif (params[:name] == "3")
+      @numbers = Activities 
+      @name = "Photo and Video"
+      @title = "New Photo and Video"
+    end
+    @numbers = @numbers.where("DATE(created_at) > '#{params[:startDate]}'")
+    @numbers = @numbers.where("DATE(created_at) <= '#{params[:endDate]}'")
+    
+    if (params[:type] == "0")
+      @numbers = @numbers.group("date(created_at)").count
+    elsif (params[:type] == "1")
+      @numbers = @numbers.group("hour(created_at)").count
+    elsif (params[:type] == "2")
+      @numbers = @numbers.group("DAYOFWEEK(created_at)").count
+    end
+    
     render "show_line_chart"
+    
   end
   
-  def new_users_by_hours
-    @numbers = Users.count_new_user_by_hours
-    @name = "User"
-    @title = 'New Users'
-    render "show_line_chart"
-  end
-  
-  def new_users_by_weekday
-    @numbers = Users.count_new_user_by_weekday
-    @name = "User"
-    @title = 'New Users'
-    render "show_line_chart"
-  end
-  
-  def new_photos
-    @numbers = Photos.count_new_photos
-    @name = 'Photos'
-    @title = 'New Photos'
-    render "show_line_chart"
-  end
-  
-  def new_photos_by_hours
-    @numbers = Photos.count_new_photos_by_hours
-    @name = 'Photos'
-    @title = 'New Photos'
-    render "show_line_chart"
-  end
-  
-  def new_photos_by_weekday
-    @numbers = Photos.count_new_photos_by_weekday
-    @name = 'Photos'
-    @title = 'New Photos'
-    render "show_line_chart"
-  end
-  
-  def count_got_from
-    @numbers = Users.count_got_from
-    @name = 'Users'
-    @title = "设备使用情况"
-    render "show_pie_chart"
-  end
   
 end
