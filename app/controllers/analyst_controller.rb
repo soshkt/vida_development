@@ -41,7 +41,10 @@ class AnalystController < ApplicationController
       @numbers = @numbers.group("DAYOFWEEK(created_at)").count
     end
     
-    render "show_line_chart"
+    respond_to do |f|
+      f.js
+    end
+   # render "show_line_chart"
     
   end
   

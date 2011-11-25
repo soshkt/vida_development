@@ -51,7 +51,7 @@
   <p> 数据分析 </p>
   <div id="columns">
     <div id="side">
-      <%= form_tag  "todo" do %>
+      <%= form_tag  "todo",:remote => true do %>
         <p>开始时间: <%=text_field_tag :startDate, params[:startDate], :value => 1.months.ago.strftime("%Y-%m-%d") %></p>
         <p>结束时间: <%=text_field_tag :endDate, params[:endDate],:value => Time.now.strftime("%Y-%m-%d") %></p>
         <p> 统计内容: 
@@ -60,7 +60,7 @@
         <p> 时间单位
           <%= select_tag :type, options_for_select([["每天",0],["小时",1],["星期",2]])%>
         </p> 
-        <%= submit_tag "submit"%>       
+        <%= submit_tag "submit",:remote => true %>       
       <% end %>
       
     </div>
