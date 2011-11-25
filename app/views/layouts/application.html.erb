@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>VidaDevelopment</title>
+  <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+  <%= stylesheet_link_tag    "application" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+  <%= yield :js %>
+</head>
+<body>
+
+<%= yield %>
+
+</body>
+</html>

@@ -1,0 +1,60 @@
+<html>
+<head>
+  <title>Analyst</title>
+  <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+  <%= stylesheet_link_tag    "analyst" %>
+  <%= javascript_include_tag "analyst" %>
+  <script type="text/javascript">
+  	$(function() {
+  		$( "#datepicker1" ).datepicker({
+  		  showOptions: {direction: 'up' },
+  		  defaultDate: '-1m',
+  		  showMonthAfterYear: true, // 月在年之后显示  
+        changeMonth: true,     // 允许选择月份  
+        changeYear: true,     // 允许选择年份  
+        dateFormat:'yy-mm-dd',    // 设置日期格式  
+        closeText:'关闭',     // 只有showButtonPanel: true才会显示出来  
+        duration: 'fast',  
+        showAnim:'fadeIn',  
+      //  showOn:'button',     // 在输入框旁边显示按钮触发，默认为：focus。还可以设置为both  
+     //   buttonImage: 'images/commons/calendar.gif',     // 按钮图标  
+      //  buttonImageOnly: true,                // 不把图标显示在按钮上，即去掉按钮  
+    //    buttonText:'选择日期',  
+    //    showButtonPanel: true,  
+        showOtherMonths: true,  
+    //    appendText: '(2011-10-10)',
+  		});
+  	});
+  	$(function() {
+  		$( "#datepicker2" ).datepicker({
+ //       currentText: '2011-10-20',
+  		  showMonthAfterYear: true, // 月在年之后显示  
+        changeMonth: true,     // 允许选择月份  
+        changeYear: true,     // 允许选择年份  
+        dateFormat:'yy-mm-dd',    // 设置日期格式  
+        closeText:'关闭',     // 只有showButtonPanel: true才会显示出来  
+        duration: 'fast',  
+        showAnim:'fadeIn',  
+      //  showOn:'button',     // 在输入框旁边显示按钮触发，默认为：focus。还可以设置为both  
+     //   buttonImage: 'images/commons/calendar.gif',     // 按钮图标  
+      //  buttonImageOnly: true,                // 不把图标显示在按钮上，即去掉按钮  
+    //    buttonText:'选择日期',  
+    //    showButtonPanel: true,  
+        showOtherMonths: true,  
+        //appendText: '(yyyy-mm-dd)',
+  		});
+  	});
+  </script>
+  <%= csrf_meta_tags %>
+  <%= yield :js %>
+</head>
+<body>
+<p> 数据分析 </p>
+<div class="demo">
+  <p>开始时间: <input type="text" id="datepicker1"></p>
+  <p>结束时间: <input type="text" id="datepicker2"></p>
+</div>
+<%= yield %>
+
+</body>
+</html>

@@ -1,0 +1,31 @@
+<div id="chart"></div>
+
+
+<% content_for :js do %>
+  <script type="text/javascript">
+   google.load("visualization", "1", {
+     packages: ["corechart"]
+   });
+   
+   google.setOnLoadCallback(function() {
+     var chart, data;
+     data = new google.visualization.DataTable();
+     data.addColumn('string', 'Date');
+     data.addColumn('number', "<%= @name%>");
+     data.addRows(  <%= @numbers.count %> );
+     <% k = 0 %>
+     <% @numbers.each do |number| %>
+     data.setValue(<%=k %>,0,"<%= number[0] %>");
+     data.setValue(<%=k %>,1,<%=number[1]%>);
+     <% k+=1 %>
+     <% end %>
+     chart = new google.visualization.LineChart(document.getElementById('chart'));
+     return chart.draw(data, {
+       width: 1000,
+       height: 700,
+       title: "<%= @title %>"
+     });
+   });
+  
+  </script>
+<% end %>
